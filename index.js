@@ -2,7 +2,9 @@ const fetch = require('node-fetch');
 const delay = require('yoctodelay');
 require('dotenv').config();
 
-const { API_KEY: key, GOOGLE_KEY: googlekey, PAGE_URL: pageurl } = process.env;
+const {
+  API_KEY: key, GOOGLE_KEY: googlekey, PAGE_URL: pageurl, SOLVE, RETRY,
+} = process.env;
 
 const fetchJson = url => fetch(url).then(data => data.json());
 
@@ -29,7 +31,7 @@ async function solveCaptcha(retry = true) {
   const { request: id } = await sendCaptcha();
   console.log({ id });
 
-  const solution = await getCaptcha(solverId);
+  const solution = await getCaptcha(id);
   if (solution.includes('ERROR')) {
     if (retry) {
       console.log({ id, error: solution, retry });
@@ -37,6 +39,11 @@ async function solveCaptcha(retry = true) {
     }
   }
   return solution;
+}
+
+if (SOLVE) {
+  // start instantly
+  solveCaptcha(RETRY).then(console.log);
 }
 
 module.exports = solveCaptcha;
