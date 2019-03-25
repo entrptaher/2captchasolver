@@ -1,5 +1,6 @@
-const fetch = require("node-fetch");
-const delay = require("yoctodelay");
+const fetch = require('node-fetch');
+const delay = require('yoctodelay');
+require('dotenv').config();
 
 const { API_KEY: key, GOOGLE_KEY: googlekey, PAGE_URL: pageurl } = process.env;
 
@@ -15,19 +16,26 @@ async function getCaptcha(id) {
 
   await delay(10000);
   const { request } = await fetchJson(reqUrl);
-  if (request.includes("_NOT_READY")) {
-    console.log(id, "captcha not ready");
+  if (request.includes('_NOT_READY')) {
+    console.log({ id, status: request });
+
     await delay(10000);
     return getCaptcha(id);
   }
   return request;
 }
 
-async function solveCaptcha() {
-  const { request: solverId } = await sendCaptcha();
-  console.log({ solverId });
+async function solveCaptcha(retry = true) {
+  const { request: id } = await sendCaptcha();
+  console.log({ id });
+
   const solution = await getCaptcha(solverId);
-  if (solution.includes("ERROR")) return solveCaptcha();
+  if (solution.includes('ERROR')) {
+    if (retry) {
+      console.log({ id, error: solution, retry });
+      return solveCaptcha();
+    }
+  }
   return solution;
 }
 
