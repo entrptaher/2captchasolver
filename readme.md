@@ -1,9 +1,7 @@
 ```
-➜  pup node captcha.js
-{ solverId: '61324902425' }
-61324902425 Captcha not ready, will restart
-61324902425 Captcha not ready, will restart
-61324902425 Captcha not ready, will restart
-61324902425 Captcha not ready, will restart
-61324902425 03AOLTBLQrquyweYU6EFM4n_vyH-Ljt7mklg1tDy6Aa1_QjFBX_L7_f6lAz6SDhaKNipAr5CixNytmoYhRXtVskmtwqvxr9N6GB78aeXw0ChqOc4X09-mzs7XYAJiwM4IfCUPxEzklGet0CJpkVCL6z4s9FkbmhHxANstfeXAoGHbZz5KPOFafEwxCb3yYhmkao4PP0bk3NbtV1RCA94DCbeWpPnPHgXZYwLgMwdcZoC4EJc1Blr9aNr6DDaqjqbhspitCmEPex2BrBUTNXj-OjQI3NrKMOLwTIHkZ9hQ3YKyC1XdUvowPhYq01HJCY87ghU9SvbRlhDUt
+➜  node index.js
+{ id: '61324982345' }
+{ id: '61324982345', status: 'CAPCHA_NOT_READY' }
+{ id: '61324982345', status: 'CAPCHA_NOT_READY' }
+03A.............................xasdasddq12312313
 ```
